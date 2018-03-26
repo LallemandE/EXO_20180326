@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -91,7 +94,11 @@
     <header>
       <a href="main.html">HOME</a>
       <ul>
-        <li><a href="login.php">Login</a></li>
+        <?php if($_SESSION['pseudo'] == '') {?>
+        	<li><a href="login.php">Login</a></li>
+        <?php } else { ?>
+        	<li><a href="logout.php">Logout</a></li>
+        <?php } ?>
         <li><a href="register.php">Register</a></li>
       </ul>
     </header>
