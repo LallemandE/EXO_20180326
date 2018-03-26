@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style>
+    header {
+      display : flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header a {
+      display :block;
+      width : 80px;
+      height : 30px;
+      line-height : 30px;
+      text-decoration : none;
+      background-color: lightblue;
+      text-align : center;
+      border-radius: 5px;
+    }
+
+
+
+    header ul {
+      display :block;
+    }
+    header ul li {
+      display : inline-block;
+    }
+
+    header ul li a {
+      display : inline-block;
+      width : 80px;
+      height : 30px;
+      line-height : 30px;
+      color : red;
+      text-decoration : none;
+      margin : 10px 10px;
+      border-radius : 10px;
+      background : lightgrey;
+      text-align : center;
+
+    }
+
+
+
+
+      h1 {
+        margin : 20px auto;
+        text-align : center;
+      }
+      main {
+        background : grey;
+        text-align : center;
+        padding : 20px 0px;
+      }
+      input {
+        display : block;
+        padding : 5px 10px;
+      }
+      input[type="text"], input[type="password"]  {
+        width : 150px;
+        height : 50px;
+        background : lightgreen;
+        border-radius : 10px;
+        margin : 20px auto;
+        border : 2px solid grey;
+
+      }
+      input[type="submit"] {
+        width : 100px;
+        margin : 20px auto;
+        border-radius : 5px;
+        border : 2px solid grey;
+        text-align : center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="main.html">HOME</a>
+      <ul>
+        <li><a href="login.php">Login</a></li>
+        <li><a href="register.php">Register</a></li>
+      </ul>
+    </header>
+    <h1>LOGIN</h1>
+    <main>
+      <form method="post">
+        <input type="text" name="username" value="" placeholder="User name ? ..." />
+        <input type="password" name="pwd" value="" placeholder="Password ? ..." />
+        <input type="submit" name="login" value="LOGIN">
+      </form>
+    </main>
+
+  </body>
+</html>
