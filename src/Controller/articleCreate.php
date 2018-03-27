@@ -27,4 +27,7 @@ class ArticleCreateController extends AbstractController {
         }
     }
 }
+$controller = new ArticleCreateController();
+$controller->processRequest();
+include "../src/Templates/index.php";
 ?>

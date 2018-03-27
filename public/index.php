@@ -8,10 +8,12 @@ use Service\DBConnector;
 DBConnector::setConfig($configs['db']);
 
 $map = [
-  '' => __DIR__ . '/../src/Controller/index.php',
-  '/register' => __DIR__ . '/../src/Controller/register.php',
+    '' => __DIR__ . '/../src/Controller/index.php',
+    '/register' => __DIR__ . '/../src/Controller/register.php',
     '/login' =>   __DIR__ . '/../src/Controller/login.php',
-    '/logout' => __DIR__ . '/../src/Controller/logout.php'
+    '/logout' => __DIR__ . '/../src/Controller/logout.php',
+    '/articleCreate' => __DIR__ . '/../src/Controller/articleCreate.php'
+    
 ];
 
 $url = $_SERVER['REQUEST_URI'];

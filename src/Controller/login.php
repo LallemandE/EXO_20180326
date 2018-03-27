@@ -1,9 +1,11 @@
 <?php
+require_once '../Core/AbstractController.php';
+
 class LoginController extends AbstractController{
     public function processRequest(){
         $this->startSession();
         if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
-            header('Location: ./index.php');
+            $this->redirect('index.php');
         }
         
         
@@ -27,7 +29,7 @@ class LoginController extends AbstractController{
                     if (!empty($result)){
                         if (password_verify ($pwd, $result['pwd'])){
                             $_SESSION['pseudo'] = $pseudo;
-                            $this->redirect('./index.php');
+                            $this->redirect('index.php');
                         }
                     }
                 $errorMessage = "Unable to login !";
@@ -40,5 +42,5 @@ class LoginController extends AbstractController{
 $controller = new LoginController();
 $controller->processRequest();
 
-include "../Templates/login.php";
+include "../src/Templates/login.php";
 ?>
