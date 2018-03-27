@@ -17,6 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $pwd = $_POST['pwd'] ?? null;
     $pwd2 = $_POST['pwd2'] ?? null;
     
+    if (strlen($pseudo) < 5){
+        $errorMessage = "Unable to register : Error in entered data !";
+        $pseudoErrorMessage = "Pseudo is too short (min 5 chars) !";
+    }
+    
     
     if ($pwd != $pwd2) {
         $pwdErrorMessage = "Password and its copy are not equal !";
@@ -35,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         try {
             $db = new PDO($dsn, $dbconfig['dbuser'], $dbconfig['dbpass']);
         } catch (Exception $e){
+            
             die ('Unable to open DB / '. $e->getCode() . ' ' . $e->getMessage());
         }
         $sqlQuery = 'INSERT INTO user (pseudo, fullname, pwd) VALUES (:pseudo, :fullname, :pwd)';
@@ -44,13 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $statement->bindValue('fullname', $fullname);
         $statement->bindValue('pwd', $pwd);
         if (! $statement->execute()){
-            $errorMessage = "Unable to register new user !";
+            $errorMessage = "Unable to create new user !";
+            include 'error.php';
+            die();
         }
-        
     }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -139,23 +144,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         border : 2px solid grey;
         text-align : center;
       }
+      .error {
+        color : white;
+        font-weight : bold;
+      }
     </style>
   </head>
   <body>
-    <header>
-      <a href="main.html">HOME</a>
-      <ul>
-        <li><a href="login.php">Login</a></li>
-        <li><a href="register.php">Register</a></li>
-      </ul>
-    </header>
+  	<?php
+  	     include 'header.php';
+  	?>
     <h1>REGISTER</h1>
     <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
     <main>
       <form method="post">
+      	<?php
+      	     if ($pseudoErrorMessage != '') {
+      	         echo '<p class="error">' . $pseudoErrorMessage . '</p>';
+      	     }
+  		?>
         <input type="text" name="pseudo" value="<?php echo $_POST['pseudo'] ?? ""; ?>" placeholder="Pseudo ? ..." />
         <input type="text" name="fullname" value="" placeholder="Fullname ? ..." />
-        <?php if ($pwdErrorMessage != "") echo '<h2>'. $pwdErrorMessage . '</h2>'; ?>
+        <?php if ($pwdErrorMessage != "") echo '<p class="error">'. $pwdErrorMessage . '</p>'; ?>
         <input type="password" name="pwd" value="<?php echo $_POST['pwd'] ?? ""; ?>" placeholder="Password ? ..." />
         <input type="password" name="pwd2" value="<?php echo $_POST['pwd2'] ?? ""; ?>" placeholder="Enter your password again  ..." />
         <input type="submit" name="register" value="REGISTER">

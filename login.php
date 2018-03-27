@@ -1,7 +1,12 @@
 <?php
 session_start();
+if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
+    header('Location: ./index.php');
+}
+
 
 $errorMessage = '';
+$pseudo = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
@@ -19,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $dbconfig['dbname']);
         try {
             $db = new PDO($dsn, $dbconfig['dbuser'], $dbconfig['dbpass']);
-        } catch (Exception $e){
+        } catch (PDOException $e){
             die ('Unable to open DB / '. $e->getCode() . ' ' . $e->getMessage());
         }
         $sqlQuery = 'SELECT COUNT(id) AS nbUser FROM user WHERE pseudo = :pseudo AND pwd = :pwd';
@@ -30,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = $statement->fetch();
             if ($result['nbUser' == 1]){
                 $_SESSION['pseudo'] = $pseudo;
+                header('Location: ./index.php');
             } else {
                 $errorMessage = "Unable to login !";
             }
@@ -39,9 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
-if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
-    header('Location: ./index.php');
-}
 
 ?>
 <!DOCTYPE html>
@@ -129,10 +132,14 @@ if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
     <header>
       <a href="main.html">HOME</a>
       <ul>
-      	<?php if($_SESSION['pseudo'] == '') {?>
+        <?php if (! isset($_SESSION['pseudo']) || ($_SESSION['pseudo'] == "") || ($_SESSION['pseudo'] == null)) {?>
         	<li><a href="login.php">Login</a></li>
+        <?php } else { ?>
+        	<li><a href="logout.php">Logout</a></li>
         <?php } ?>
+        <?php if (! isset($_SESSION['pseudo']) || ($_SESSION['pseudo'] == "") || ($_SESSION['pseudo'] == null)) {?>
         <li><a href="register.php">Register</a></li>
+        <?php } ?>
       </ul>
     </header>
     <?php 
