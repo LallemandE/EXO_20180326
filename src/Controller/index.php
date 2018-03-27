@@ -1,14 +1,14 @@
 <?php
 require_once '../Core/AbstractController.php';
-class HomeController extends AbstractControler
+
+class HomeController extends AbstractController
 {
     public function processRequest(){
-        include "../Templates/index.php";
         $this->StartSession();
         $pseudo = $_SESSION['pseudo'] ?? null;
     }
 }
 $controller = new HomeController();
 $controller->processRequest();
-include "../Templates/index.php";
+include "../src/Templates/index.php";
 ?>

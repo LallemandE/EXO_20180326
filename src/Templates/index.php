@@ -51,7 +51,7 @@
   </head>
   <body>
   	<?php
-  	     include '../../Templates/header.php';
+  	     include '../src/Templates/header.php';
   	?>
     <h1>WELCOME TO MY AWESOME WEBSITE !</h1>
     <main>
