@@ -7,66 +7,24 @@ $pseudo = $_SESSION['pseudo'] ?? null;
   <head>
     <meta charset="utf-8">
     <title>Main Screen</title>
+    <link rel="stylesheet" href="/css/main.css">
     <style media="screen">
-      * {
-      }
 
-      header {
-        display : flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      header a {
-        display :block;
-        width : 80px;
-        height : 30px;
-        line-height : 30px;
-        text-decoration : none;
-        background-color: lightblue;
-        text-align : center;
-        border-radius: 5px;
-      }
-
-
-
-      header ul {
-        display :block;
-      }
-      header ul li {
-        display : inline-block;
-      }
-
-      header ul li a {
-        display : inline-block;
-        width : 80px;
-        height : 30px;
-        line-height : 30px;
-        color : red;
-        text-decoration : none;
-        margin : 10px 10px;
-        border-radius : 10px;
-        background : lightgrey;
-        text-align : center;
-
-      }
-
-      h1 {
-        text-align: center;
-      }
 
       main {
         display: flex;
         flex-wrap: wrap;
         justify-content : space-around;
         background : grey;
-        width : 900px;
+        width : 90%;
         margin : 10px auto;
+        font-size : 2vw;
       }
 
       article {
         display : block;
         width : 30%;
+        min-width : 200px;
         background : lightgreen;
         border-radius : 10px;
         margin : 5px 10px;
@@ -75,6 +33,7 @@ $pseudo = $_SESSION['pseudo'] ?? null;
       article img {
         float : left;
         width : 40%;
+        margin : 5px 5px;
       }
 
       article a{
@@ -86,7 +45,9 @@ $pseudo = $_SESSION['pseudo'] ?? null;
         border-radius : 5px;
         text-align : center;
         top : 100%;
-        left : 80%;
+        right : -70%;
+        text-decoration : none;
+        color : red;
       }
 
     </style>
@@ -95,7 +56,7 @@ $pseudo = $_SESSION['pseudo'] ?? null;
   	<?php
   	     include 'header.php';
   	?>
-    <h1>WELCOME TO THIS WONDERFULL WEBSITE !</h1>
+    <h1>WELCOME TO MY AWESOME WEBSITE !</h1>
     <main>
       <article>
         <a href="articleDetail.php?id=1">More</a>

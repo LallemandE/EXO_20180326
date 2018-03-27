@@ -27,21 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         } catch (PDOException $e){
             die ('Unable to open DB / '. $e->getCode() . ' ' . $e->getMessage());
         }
-        $sqlQuery = 'SELECT COUNT(id) AS nbUser FROM user WHERE pseudo = :pseudo AND pwd = :pwd';
+        $sqlQuery = 'SELECT pwd FROM user WHERE pseudo = :pseudo';
         $statement = $db->prepare($sqlQuery);
         $statement->bindValue('pseudo', $pseudo);
-        $statement->bindValue('pwd', $pwd);
+
         if ($statement->execute()){
             $result = $statement->fetch();
-            if ($result['nbUser' == 1]){
-                $_SESSION['pseudo'] = $pseudo;
-                header('Location: ./index.php');
-            } else {
-                $errorMessage = "Unable to login !";
+            if (!empty($result)){
+                if (password_verify ($pwd, $result['pwd'])){
+                    $_SESSION['pseudo'] = $pseudo;
+                    header('Location: ./index.php');
+                }
             }
-            
+        $errorMessage = "Unable to login !";
         }
-        
     }
 }
 
@@ -129,22 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </style>
   </head>
   <body>
-    <header>
-      <a href="main.html">HOME</a>
-      <ul>
-        <?php if (! isset($_SESSION['pseudo']) || ($_SESSION['pseudo'] == "") || ($_SESSION['pseudo'] == null)) {?>
-        	<li><a href="login.php">Login</a></li>
-        <?php } else { ?>
-        	<li><a href="logout.php">Logout</a></li>
-        <?php } ?>
-        <?php if (! isset($_SESSION['pseudo']) || ($_SESSION['pseudo'] == "") || ($_SESSION['pseudo'] == null)) {?>
-        <li><a href="register.php">Register</a></li>
-        <?php } ?>
-      </ul>
-    </header>
-    <?php 
-
-    ?>
+  	<?php
+  	     include 'header.php';
+  	?>
     <h1>LOGIN</h1>
     <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
     <main>

@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $pwd = $_POST['pwd'] ?? null;
     $pwd2 = $_POST['pwd2'] ?? null;
     
-    if (strlen($pseudo) < 5){
+    if (strlen($pseudo) < 3){
         $errorMessage = "Unable to register : Error in entered data !";
-        $pseudoErrorMessage = "Pseudo is too short (min 5 chars) !";
+        $pseudoErrorMessage = "Pseudo is too short (min 3 chars) !";
     }
     
     
@@ -43,16 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             
             die ('Unable to open DB / '. $e->getCode() . ' ' . $e->getMessage());
         }
+        
+        $hashedPassword = password_hash($pwd, PASSWORD_BCRYPT);
+        
         $sqlQuery = 'INSERT INTO user (pseudo, fullname, pwd) VALUES (:pseudo, :fullname, :pwd)';
         
         $statement = $db->prepare($sqlQuery);
         $statement->bindValue('pseudo', $pseudo);
         $statement->bindValue('fullname', $fullname);
-        $statement->bindValue('pwd', $pwd);
+        $statement->bindValue('pwd', $hashedPassword);
         if (! $statement->execute()){
             $errorMessage = "Unable to create new user !";
             include 'error.php';
             die();
+        } else {
+            $_SESSION['pseudo'] = $pseudo;
+            header('Location: ./index.php');
         }
     }
 }
@@ -62,59 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <head>
     <meta charset="utf-8">
     <title>Register</title>
+    <link rel="stylesheet" href="/css/main.css">
+
     <style>
-
-    header {
-      display : flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header a {
-      display :block;
-      width : 80px;
-      height : 30px;
-      line-height : 30px;
-      text-decoration : none;
-      background-color: lightblue;
-      text-align : center;
-      border-radius: 5px;
-    }
-
-
-
-    header ul {
-      display :block;
-    }
-    header ul li {
-      display : inline-block;
-    }
-
-    header ul li a {
-      display : inline-block;
-      width : 80px;
-      height : 30px;
-      line-height : 30px;
-      color : red;
-      text-decoration : none;
-      margin : 10px 10px;
-      border-radius : 10px;
-      background : lightgrey;
-      text-align : center;
-
-    }
-      h1 {
-        margin : 20px auto;
-        text-align : center;
-      }
-      
-      h2 {
-        margin : 10px auto;
-        text-align : center;
-        color : red;
-        font-weight: bold;
-      }
-      
       main h2 {
         color : black;
       }
@@ -124,10 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         text-align : center;
         padding : 20px 0px;
       }
+      
       input {
         display : block;
         padding : 5px 10px;
       }
+      
       input[type="text"], input[type="password"]  {
         width : 200px;
         height : 50px;
@@ -137,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         border : 2px solid grey;
 
       }
+      
       input[type="submit"] {
         width : 100px;
         margin : 20px auto;
@@ -144,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         border : 2px solid grey;
         text-align : center;
       }
+      
       .error {
         color : white;
         font-weight : bold;

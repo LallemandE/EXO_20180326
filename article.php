@@ -3,54 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Article</title>
+    <link rel="stylesheet" href="/css/main.css">
     <style>
-      
-      header {
-        display : flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      header a {
-        display :block;
-        width : 80px;
-        height : 30px;
-        line-height : 30px;
-        text-decoration : none;
-        background-color: lightblue;
-        text-align : center;
-        border-radius: 5px;
-      }
-
-
-
-      header ul {
-        display :block;
-      }
-      header ul li {
-        display : inline-block;
-      }
-
-      header ul li a {
-        display : inline-block;
-        width : 80px;
-        height : 30px;
-        line-height : 30px;
-        color : red;
-        text-decoration : none;
-        margin : 10px 10px;
-        border-radius : 10px;
-        background : lightgrey;
-        text-align : center;
-
-      }
-
-
-
-
-      h1 {
-        text-align : center;
-      }
       main {
         display : flex;
         flex-direction : row;
