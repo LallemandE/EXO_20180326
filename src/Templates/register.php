@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $statement->bindValue('pwd', $hashedPassword);
         if (! $statement->execute()){
             $errorMessage = "Unable to create new user !";
-            include 'error.php';
+            include '../../Templates/error.php';
             die();
         } else {
             $_SESSION['pseudo'] = $pseudo;
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </head>
   <body>
   	<?php
-  	     include 'header.php';
+  	     include '../../Templates/header.php';
   	?>
     <h1>REGISTER</h1>
     <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>

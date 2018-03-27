@@ -1,7 +1,4 @@
-<?php
-session_start();
-$pseudo = $_SESSION['pseudo'] ?? null;
-?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -54,7 +51,7 @@ $pseudo = $_SESSION['pseudo'] ?? null;
   </head>
   <body>
   	<?php
-  	     include 'header.php';
+  	     include '../../Templates/header.php';
   	?>
     <h1>WELCOME TO MY AWESOME WEBSITE !</h1>
     <main>

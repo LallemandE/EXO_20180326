@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </head>
   <body>
   	<?php
-  	     include 'header.php';
+  	     include '../../Templates/header.php';
   	?>
     <h1>LOGIN</h1>
     <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
