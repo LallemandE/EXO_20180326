@@ -171,7 +171,7 @@ class ArticleController extends AbstractController
             
             
         }
-        include "../Templates/articleCreate.php";
+        include __DIR__. "/../Templates/articleCreate.php";
     }
 }
 
