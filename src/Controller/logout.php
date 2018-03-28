@@ -1,10 +1,14 @@
 <?php
-class LogoutController extends AbstractController{
+
+require_once '../Core/AbstractController.php';
+
+
+class LogoutController extends AbstractController {
     public function processRequest(){
         $this->startSession();
         $_SESSION = [];
         session_destroy();
-        $this->redirect('./index.php');
+        $this->redirect('/');
     }
 }
 $controller = new LogoutController();

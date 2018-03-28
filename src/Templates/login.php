@@ -35,10 +35,10 @@
   </head>
   <body>
   	<?php
-  	     include '../../Templates/header.php';
+  	     include '../src/Templates/header.php';
   	?>
     <h1>LOGIN</h1>
-    <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
+    <?php if ($controller->errorMessage != "") echo '<h2>'. $controller->errorMessage . '</h2>'; ?>
     <main>
       <form method="post">
         <input type="text" name="pseudo" value="<?php echo $_POST['pseudo'] ?? ""; ?>" placeholder="User name ? ..." />

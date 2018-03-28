@@ -2,6 +2,8 @@
 require_once '../Core/AbstractController.php';
 
 class LoginController extends AbstractController{
+    public $errorMessage = ""; 
+    
     public function processRequest(){
         $this->startSession();
         if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
@@ -29,10 +31,10 @@ class LoginController extends AbstractController{
                     if (!empty($result)){
                         if (password_verify ($pwd, $result['pwd'])){
                             $_SESSION['pseudo'] = $pseudo;
-                            $this->redirect('index.php');
+                            $this->redirect('/');
                         }
                     }
-                $errorMessage = "Unable to login !";
+                $this->errorMessage = "Unable to login !";
                 }
             }
         }

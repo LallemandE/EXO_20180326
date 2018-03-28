@@ -4,9 +4,9 @@ class AbstractController
     public function getConnection()
     {
         try {
-            return new PDO('mysql:host=localhost;dbname=ecom', 'root');
+            return new PDO('mysql:host=localhost;dbname=exo20180326', 'root');
         } catch (PDOException $e) {
-            include '../Template/error.php';
+            include '/src/Template/error.php';
             die();
         }
     }
@@ -24,3 +24,4 @@ class AbstractController
         die();
     }
 }
+?>

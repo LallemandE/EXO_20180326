@@ -1,68 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
-    header('Location: ./index.php');
-}
-
-$errorMessage = '';
-$pwdErrorMessage = '';
-$pseudoErrorMessage = '';
-$fullnameErrorMessage = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-    $pseudo = $_POST['pseudo'] ?? null;
-    $fullname = $_POST['fullname'] ?? null;
-    $pwd = $_POST['pwd'] ?? null;
-    $pwd2 = $_POST['pwd2'] ?? null;
-    
-    if (strlen($pseudo) < 3){
-        $errorMessage = "Unable to register : Error in entered data !";
-        $pseudoErrorMessage = "Pseudo is too short (min 3 chars) !";
-    }
-    
-    
-    if ($pwd != $pwd2) {
-        $pwdErrorMessage = "Password and its copy are not equal !";
-        $errorMessage = "Unable to register : Error in entered data !";
-    }
-    
-    if ($errorMessage ==""){
-        $config = include "./config/app.conf.php" ;
-        
-        $dbconfig = $config['db'];
-        
-        $dsn = sprintf('%s:host=%s;dbname=%s',
-            $dbconfig['driver'],
-            $dbconfig['host'],
-            $dbconfig['dbname']);
-        try {
-            $db = new PDO($dsn, $dbconfig['dbuser'], $dbconfig['dbpass']);
-        } catch (Exception $e){
-            
-            die ('Unable to open DB / '. $e->getCode() . ' ' . $e->getMessage());
-        }
-        
-        $hashedPassword = password_hash($pwd, PASSWORD_BCRYPT);
-        
-        $sqlQuery = 'INSERT INTO user (pseudo, fullname, pwd) VALUES (:pseudo, :fullname, :pwd)';
-        
-        $statement = $db->prepare($sqlQuery);
-        $statement->bindValue('pseudo', $pseudo);
-        $statement->bindValue('fullname', $fullname);
-        $statement->bindValue('pwd', $hashedPassword);
-        if (! $statement->execute()){
-            $errorMessage = "Unable to create new user !";
-            include '../../Templates/error.php';
-            die();
-        } else {
-            $_SESSION['pseudo'] = $pseudo;
-            header('Location: ./index.php');
-        }
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -112,20 +47,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </head>
   <body>
   	<?php
-  	     include '../../Templates/header.php';
+  	     include '../src/Templates/header.php';
   	?>
     <h1>REGISTER</h1>
-    <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
+    <?php if ($controller->errorMessage != "") echo '<h2>'. $controller->errorMessage . '</h2>'; ?>
     <main>
       <form method="post">
       	<?php
-      	     if ($pseudoErrorMessage != '') {
-      	         echo '<p class="error">' . $pseudoErrorMessage . '</p>';
+      	if ($controller->pseudoErrorMessage != '') {
+      	    echo '<p class="error">' . $controller->pseudoErrorMessage . '</p>';
       	     }
   		?>
         <input type="text" name="pseudo" value="<?php echo $_POST['pseudo'] ?? ""; ?>" placeholder="Pseudo ? ..." />
         <input type="text" name="fullname" value="" placeholder="Fullname ? ..." />
-        <?php if ($pwdErrorMessage != "") echo '<p class="error">'. $pwdErrorMessage . '</p>'; ?>
+        <?php if ($controller->pwdErrorMessage != "") echo '<p class="error">'. $controller->pwdErrorMessage . '</p>'; ?>
         <input type="password" name="pwd" value="<?php echo $_POST['pwd'] ?? ""; ?>" placeholder="Password ? ..." />
         <input type="password" name="pwd2" value="<?php echo $_POST['pwd2'] ?? ""; ?>" placeholder="Enter your password again  ..." />
         <input type="submit" name="register" value="REGISTER">
