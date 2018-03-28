@@ -8,7 +8,7 @@ use Service\DBConnector;
 DBConnector::setConfig($configs['db']);
 
 $map = [
-    '' => __DIR__ . '/../src/Controller/index.php',
+    '' => __DIR__ . '/../src/Controller/home.php',
     '/register' => __DIR__ . '/../src/Controller/register.php',
     '/login' =>   __DIR__ . '/../src/Controller/login.php',
     '/logout' => __DIR__ . '/../src/Controller/logout.php',

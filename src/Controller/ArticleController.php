@@ -27,7 +27,7 @@ class ArticleController extends AbstractController
             $resultArray = $statement->fetchAll();
         }
         
-        include __DIR__. "/../Templates/index.php";
+        include __DIR__. "/../Templates/home.php";
     }
     
     public function deleteAction(){
