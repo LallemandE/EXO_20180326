@@ -3,14 +3,14 @@
 require_once '../Core/AbstractController.php';
 
 class RegisterController extends AbstractController {
-    public $errorMessage = '';
-    public $pwdErrorMessage = '';
-    public $pseudoErrorMessage = '';
-    public $fullnameErrorMessage = '';
     
     public function processRequest (){
         
         $this->startSession();
+        
+        $errorMessage = '';
+        $pseudoErrorMessage = '';
+        $pwdErrorMessage = '';
         
         if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] != "")){
             $this->redirect('index.php');
@@ -25,14 +25,14 @@ class RegisterController extends AbstractController {
             $pwd2 = $_POST['pwd2'] ?? null;
             
             if (strlen($pseudo) < 3){
-                $this->errorMessage = "Unable to register : Error in entered data !";
-                $this->pseudoErrorMessage = "Pseudo is too short (min 3 chars) !";
+                $errorMessage = "Unable to register : Error in entered data !";
+                $pseudoErrorMessage = "Pseudo is too short (min 3 chars) !";
             }
             
             
             if ($pwd != $pwd2) {
-                $this->pwdErrorMessage = "Password and its copy are not equal !";
-                $this->errorMessage = "Unable to register : Error in entered data !";
+                $pwdErrorMessage = "Password and its copy are not equal !";
+                $errorMessage = "Unable to register : Error in entered data !";
             }
             
             if ($this->errorMessage ==""){
@@ -47,22 +47,20 @@ class RegisterController extends AbstractController {
                 $statement->bindValue('fullname', $fullname);
                 $statement->bindValue('pwd', $hashedPassword);
                 if (! $statement->execute()){
-                    $this->errorMessage = "Unable to create new user !";
+                    $errorMessage = "Unable to create new user !";
                     include '../src/Templates/error.php';
                     die();
                 } else {
                     $_SESSION['pseudo'] = $pseudo;
-                    $this->redirect('index.php');
+                    $this->redirect('/');
                 }
             }
         }
+        include "../src/Templates/register.php";
     }
 }
 
 
 $controller = new RegisterController();
 $controller->processRequest();
-
-include "../src/Templates/register.php";
-
 ?>

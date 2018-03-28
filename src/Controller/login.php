@@ -2,7 +2,7 @@
 require_once '../Core/AbstractController.php';
 
 class LoginController extends AbstractController{
-    public $errorMessage = ""; 
+     
     
     public function processRequest(){
         $this->startSession();
@@ -34,15 +34,15 @@ class LoginController extends AbstractController{
                             $this->redirect('/');
                         }
                     }
-                $this->errorMessage = "Unable to login !";
+                $errorMessage = "Unable to login !";
                 }
             }
         }
+        
+        include "../src/Templates/login.php";
     }
 }
 
 $controller = new LoginController();
 $controller->processRequest();
-
-include "../src/Templates/login.php";
 ?>

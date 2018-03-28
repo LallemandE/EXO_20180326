@@ -50,17 +50,17 @@
   	     include '../src/Templates/header.php';
   	?>
     <h1>REGISTER</h1>
-    <?php if ($controller->errorMessage != "") echo '<h2>'. $controller->errorMessage . '</h2>'; ?>
+    <?php if ($errorMessage != "") echo '<h2>'. $errorMessage . '</h2>'; ?>
     <main>
       <form method="post">
       	<?php
-      	if ($controller->pseudoErrorMessage != '') {
-      	    echo '<p class="error">' . $controller->pseudoErrorMessage . '</p>';
+      	if ($pseudoErrorMessage != '') {
+      	    echo '<p class="error">' . $pseudoErrorMessage . '</p>';
       	     }
   		?>
         <input type="text" name="pseudo" value="<?php echo $_POST['pseudo'] ?? ""; ?>" placeholder="Pseudo ? ..." />
         <input type="text" name="fullname" value="" placeholder="Fullname ? ..." />
-        <?php if ($controller->pwdErrorMessage != "") echo '<p class="error">'. $controller->pwdErrorMessage . '</p>'; ?>
+        <?php if ($pwdErrorMessage != "") echo '<p class="error">'. $pwdErrorMessage . '</p>'; ?>
         <input type="password" name="pwd" value="<?php echo $_POST['pwd'] ?? ""; ?>" placeholder="Password ? ..." />
         <input type="password" name="pwd2" value="<?php echo $_POST['pwd2'] ?? ""; ?>" placeholder="Enter your password again  ..." />
         <input type="submit" name="register" value="REGISTER">
