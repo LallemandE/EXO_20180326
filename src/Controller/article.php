@@ -1,42 +1,9 @@
 <?php
 // require_once '../Core/AbstractController.php';
 
-use Core\AbstractController;
+require_once '../vendor/autoload.php';
 
-class ArticleController extends AbstractController
-{
-    public function processRequest(){
-        $this->StartSession();
-        $resultArray = [];
-        
-        if ($_SERVER['REQUEST_METHOD'] === "GET") {
-            
-            $id = $_GET['id'] ?? null;
-            
-            if ($id) {                
-                $db = $this->getConnection();
-                
-                $sql = "SELECT * FROM article WHERE id = :id";
-                $statement = $db->prepare($sql);
-                $statement->bindValue('id', $id);
-                
-                if (! $statement->execute()) {
-                    
-                    $errorMessage = 'Unable to read article database !';
-                    include __DIR__. "/../Templates/error.php";
-                    die();
-                    
-                } 
-                    
-                $result = $statement->fetch();
-                
-                include __DIR__. "/../Templates/article.php";
-                die();
-            }
-        }
-        $this->redirect('/');
-    }
-    
-}
+use Controller\ArticleController;
+
 $controller = new ArticleController();
-$controller->processRequest();
+$controller->detailAction();
