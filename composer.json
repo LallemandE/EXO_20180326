@@ -1,0 +1,19 @@
+{
+    "name": "etudiant/exo_20180326",
+    "description": "exo20180326",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LallemandE",
+            "email": "job@lallemand.lu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+    	"psr-4": {
+			"": "src/"
+    	}
+    }
+}

@@ -1,6 +1,10 @@
 <?php
 
-require_once '../Core/AbstractController.php';
+// require_once '../Core/AbstractController.php';
+
+require_once '../vendor/autoload.php';
+
+use Core\AbstractController;
 
 
 class LogoutController extends AbstractController {

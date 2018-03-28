@@ -1,11 +1,14 @@
 <?php
+
+namespace Core;
+
 class AbstractController
 {
     public function getConnection()
     {
         try {
-            return new PDO('mysql:host=localhost;dbname=exo20180326', 'root');
-        } catch (PDOException $e) {
+            return new \PDO('mysql:host=localhost;dbname=exo20180326', 'root');
+        } catch (\PDOException $e) {
             include '/src/Template/error.php';
             die();
         }

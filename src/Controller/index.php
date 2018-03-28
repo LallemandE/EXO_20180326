@@ -1,5 +1,12 @@
 <?php
-require_once '../Core/AbstractController.php';
+
+// Une fois que l'on a installé l'autoloader et que l'on a déplacé le dossier Core dans src, il n'y a plus besoin de faire le require.
+// require_once '../Core/AbstractController.php';
+
+require_once '../vendor/autoload.php';
+
+use Core\AbstractController;
+
 
 class HomeController extends AbstractController
 {

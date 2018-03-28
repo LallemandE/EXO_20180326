@@ -1,5 +1,9 @@
 <?php
-require_once '../Core/AbstractController.php';
+// require_once '../Core/AbstractController.php';
+
+require_once '../vendor/autoload.php';
+
+use Core\AbstractController;
 
 class ArticleCreateController extends AbstractController {
     public function processRequest(){

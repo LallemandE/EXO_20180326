@@ -53,7 +53,7 @@
   	<?php
     include 'header.php';
   	?>
-    <h1>WELCOME TO MY AWESOME WEBSITE !</h1>
+    <h1>The wonderfull world of Disney !</h1>
     <main>
     	<?php
     	foreach ($resultArray as $result) {

@@ -1,5 +1,7 @@
 <?php
-require_once '../Core/AbstractController.php';
+// require_once '../Core/AbstractController.php';
+
+use Core\AbstractController;
 
 class ArticleController extends AbstractController
 {
