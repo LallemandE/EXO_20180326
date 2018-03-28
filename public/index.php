@@ -12,7 +12,9 @@ $map = [
     '/register' => __DIR__ . '/../src/Controller/register.php',
     '/login' =>   __DIR__ . '/../src/Controller/login.php',
     '/logout' => __DIR__ . '/../src/Controller/logout.php',
-    '/articleCreate' => __DIR__ . '/../src/Controller/articleCreate.php'
+    '/articleCreate' => __DIR__ . '/../src/Controller/articleCreate.php',
+    '/articleDelete' => __DIR__ . '/../src/Controller/articleDelete.php',
+    '/article' => __DIR__ . '/../src/Controller/article.php'
     
 ];
 

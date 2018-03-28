@@ -5,10 +5,24 @@ class HomeController extends AbstractController
 {
     public function processRequest(){
         $this->StartSession();
-        $pseudo = $_SESSION['pseudo'] ?? null;
+        $resultArray = [];
+        
+//      $pseudo = $_SESSION['pseudo'] ?? null;
+        
+        $db = $this->getConnection();
+        
+        $sql = "SELECT * FROM article";
+        $statement = $db->prepare($sql);
+        
+        if (! $statement->execute()) {
+            $errorMessage = 'Unable to read article database !';
+        } else {
+            $resultArray = $statement->fetchAll();
+        }
+        
+        include __DIR__. "/../Templates/index.php";
     }
 }
 $controller = new HomeController();
 $controller->processRequest();
-include "../src/Templates/index.php";
 ?>

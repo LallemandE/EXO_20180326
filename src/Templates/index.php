@@ -51,33 +51,22 @@
   </head>
   <body>
   	<?php
-  	     include '../src/Templates/header.php';
+    include 'header.php';
   	?>
     <h1>WELCOME TO MY AWESOME WEBSITE !</h1>
     <main>
-      <article>
-        <a href="articleDetail.php?id=1">More</a>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png" alt="Mickey">
-        <p>description du premier article</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </article>
-      <article>
-        <a href="articleDetail.php?id=2">More</a>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png" alt="Mickey">
-        <p>description du deuxième article</p>
-      </article>
-      <article>
-        <a href="articleDetail.php?id=3">More</a>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png" alt="Mickey">
-        <p>description du troisième article</p>
-      </article>
-      <article>
-        <a href="articleDetail.php?id=4">More</a>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png" alt="Mickey">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </article>
-
+    	<?php
+    	foreach ($resultArray as $result) {
+    	?>
+	      <article>
+    	    <a href="index.php/article?id=<?php echo ($result['id'])?>">More</a>
+        	<img src="<?php echo './img/' . $result['image_link'];?>" alt="<?php echo './img/' . $result['title'];?>">
+			<h2><?php echo ($result['title'])?></h2>
+			<p><?php echo ($result['description'])?></p>
+	      </article>
+		<?php 
+    	}
+    	?>
     </main>
   </body>
 </html>
