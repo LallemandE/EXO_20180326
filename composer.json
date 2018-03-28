@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "symfony/routing": "^4.1@dev"
+    },
     "autoload": {
     	"psr-4": {
 			"": "src/"

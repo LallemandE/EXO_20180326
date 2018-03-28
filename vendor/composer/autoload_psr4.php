@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Routing\\' => array($vendorDir . '/symfony/routing'),
     '' => array($baseDir . '/src'),
 );
