@@ -60,7 +60,7 @@
     	?>
 	      <article>
     	    <a href="index.php/article?id=<?php echo ($result['id'])?>">More</a>
-        	<img src="<?php echo './img/' . $result['image_link'];?>" alt="<?php echo './img/' . $result['title'];?>">
+        	<img src="<?php echo '/img/' . $result['image_link'];?>" alt="<?php echo './img/' . $result['title'];?>">
 			<h2><?php echo ($result['title'])?></h2>
 			<p><?php echo ($result['description'])?></p>
 	      </article>
