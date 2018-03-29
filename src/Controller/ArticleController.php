@@ -118,7 +118,7 @@ class ArticleController extends AbstractController
         if (empty($_SESSION['pseudo'])) {
             $errorCode = 404;
             $errorMessage = "Page not found !";
-            include "../Templates/error.php";
+            include __DIR__ . "/../Templates/error.php";
             die();
         }
         

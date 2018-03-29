@@ -43,7 +43,7 @@
     <main>
       <div class="leftCol">
         <img src="<?php echo '/img/' . $result['image_link'];?>" alt="<?php echo $result['title'];?>">
-        <a href="#">ADD TO CART</a>
+        <a href="/index.php/cartAdd?id=<?php echo $result['id'];?>">ADD TO CART</a>
         <?php 
         if (!empty ($_SESSION['pseudo'])){
             echo '<a href="/index.php/articleDelete?id='. $result['id']. '">DELETE ARTICLE</a>';
